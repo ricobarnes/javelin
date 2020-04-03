@@ -1,0 +1,44 @@
+@import '~@angular/material/theming';
+@import 'src/assets/themes/custom-theme.scss';
+@import 'src/assets/themes/colors.scss';
+
+.rrp-drawer-container {
+  min-height: 100vh;
+}
+
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav {
+  background-color: mat-color($custom-theme-primary, 700);
+  color: white;
+}
+
+.sidenav-btn {
+  margin-right: 10px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  border-radius: 0;
+}
+
+.sidenav-active-btn {
+  background-color: mat-color($custom-theme-accent);
+  border-radius: 0;
+}
+
+// .example-container {
+//   width: 400px;
+//   height: 200px;
+//   margin: 12px;
+//   border: 1px solid #555;
+// }
+
+mat-drawer-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
