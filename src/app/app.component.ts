@@ -14,8 +14,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   settingsFormGroup: FormGroup = this._fb.group({
     phase: new FormControl(),
     memberSort: new FormControl(),
-    allowRegistrations: new FormControl(),
-    allowUserEdits: new FormControl(),
+    slideToggle1: new FormControl(),
+    slideToggle2: new FormControl(),
   });
 
   example1Options = [
