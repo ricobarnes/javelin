@@ -1,22 +1,29 @@
-<div
-  style="display: flex; align-items: center; justify-content: space-between;"
->
-  <div></div>
-  <div>
-    <mat-icon
-      class="material-icons-outlined"
-      [matBadge]="notificationCount"
-      matBadgeColor="warn"
-      >notifications</mat-icon
-    >
-    <mat-icon
-      class="material-icons-outlined"
-      [matBadge]="messageCount"
-      matBadgeColor="warn"
-      >email</mat-icon
-    >
-    <mat-icon class="material-icons-outlined">settings</mat-icon>
-    <mat-icon class="material-icons-outlined">account_circle</mat-icon>Johnny
-    Sample
+<mat-toolbar style="display: flex; height: 56px;" class="mat-elevation-z4">
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <div></div>
+    <div style="display: flex; align-items: center;">
+      <mat-icon
+        class="material-icons-outlined"
+        [matBadge]="notificationCount"
+        matBadgeColor="warn"
+        >notifications</mat-icon
+      >
+      <mat-icon
+        class="material-icons-outlined"
+        [matBadge]="messageCount"
+        matBadgeColor="warn"
+        >email</mat-icon
+      >
+      <mat-icon class="material-icons-outlined">settings</mat-icon>
+      <mat-icon class="material-icons-outlined">account_circle</mat-icon>Johnny
+      Sample
+    </div>
   </div>
-</div>
+</mat-toolbar>
