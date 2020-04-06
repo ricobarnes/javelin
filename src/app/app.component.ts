@@ -16,8 +16,4 @@ export class AppComponent implements OnInit {
       this.isWide = val;
     });
   }
-
-  toggleSidebar() {
-    this._layoutService.setIsWide(!this.isWide);
-  }
 }

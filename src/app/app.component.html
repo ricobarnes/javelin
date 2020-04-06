@@ -4,20 +4,26 @@
     [opened]="true"
     mode="side"
     class="sidenav mat-elevation-z4"
-    [style.width]="isWide ? '200px' : '50px'"
+    [style.width]="isWide ? '200px' : '70px'"
   >
     <div>
-      <div>*** LOGO ***</div>
-      <button (click)="toggleSidebar()">Toggle</button>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        "
+      >
+        *** LOGO ***
+      </div>
     </div>
   </mat-drawer>
-  <mat-drawer-content [style.margin-left]="isWide ? '200px' : '50px'">
+  <mat-drawer-content [style.margin-left]="isWide ? '200px' : '70px'">
     <rrp-header style="position: sticky; top: 0px; z-index: 777;"></rrp-header>
 
-    <div style="flex: 1 0 auto;">
-      <div>
-        <router-outlet></router-outlet>
-      </div>
+    <div style="flex: 1 0 auto; padding: 20px;">
+      <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

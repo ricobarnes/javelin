@@ -16,4 +16,8 @@ export class LayoutService {
   isWide(): Observable<boolean> {
     return this._isWide.asObservable();
   }
+
+  toggleSidebar() {
+    this._isWide.next(!this._isWide.value);
+  }
 }
