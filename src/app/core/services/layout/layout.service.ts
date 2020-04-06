@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class LayoutService {
   private _isWide: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private _showSettings: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() {}
 
@@ -19,5 +20,9 @@ export class LayoutService {
 
   toggleSidebar() {
     this._isWide.next(!this._isWide.value);
+  }
+
+  setShowSettings(val: boolean) {
+    this._showSettings.next(val);
   }
 }

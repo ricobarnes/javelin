@@ -18,9 +18,9 @@ import { MaterialModule } from './shared/material/material.module';
     CoreModule,
     FeatureModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

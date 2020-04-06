@@ -6,6 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [PageNotFoundComponent, DashboardComponent],
-  imports: [CommonModule, SharedModule]
+  imports: [CommonModule, SharedModule],
 })
 export class FeatureModule {}

@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "ng build --prod",
+    "test": "ng test --code-coverage",
+    "test:headless": "ng test --code-coverage --browsers=ChromeHeadless --watch=false",
+    "cov": "http-server -o ./coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

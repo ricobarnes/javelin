@@ -1,6 +1,6 @@
 <mat-drawer-container class="rrp-drawer-container">
   <mat-drawer
-    #drawer
+    #mainDrawer
     [opened]="true"
     mode="side"
     class="sidenav mat-elevation-z4"
@@ -19,7 +19,84 @@
       </div>
     </div>
   </mat-drawer>
-  <mat-drawer-content [style.margin-left]="isWide ? '200px' : '70px'">
+
+  <mat-drawer #settingsDrawer mode="over" position="end">
+    <div style="display: flex; flex-direction: column; padding: 30px;">
+      <h2>System Settings</h2>
+
+      <form [formGroup]="settingsFormGroup">
+        <div style="display: flex; flex-direction: column;">
+          <fieldset>
+            <legend>Phases:</legend>
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="phase"
+            >
+              <mat-radio-button
+                *ngFor="let op of example1Options"
+                [value]="op.id"
+                name="opList"
+                style="margin: 10px;"
+                >{{ op.name }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </fieldset>
+
+          <fieldset class="top-margin">
+            <legend>Sort Members By:</legend>
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="memberSort"
+            >
+              <mat-radio-button
+                *ngFor="let op of example2Options"
+                [value]="op.id"
+                name="opList"
+                style="margin: 10px;"
+                >{{ op.name }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </fieldset>
+
+          <div class="top-margin">
+            <mat-slide-toggle
+              style="margin: 10px;"
+              formControlName="allowRegistrations"
+              [checked]="settingsFormGroup.controls.allowRegistrations?.value"
+            >
+              Allow New Registrations</mat-slide-toggle
+            >
+          </div>
+
+          <div class="top-margin">
+            <mat-slide-toggle
+              style="margin: 10px;"
+              formControlName="allowUserEdits"
+              [checked]="settingsFormGroup.controls.allowUserEdits?.value"
+            >
+              Allow User's To Edit</mat-slide-toggle
+            >
+          </div>
+        </div>
+
+        <div class="top-margin">
+          <button
+            mat-raised-button
+            color="accent"
+            style="width: 100%;"
+            (click)="saveSettings()"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content
+    [style.margin-left]="isWide ? '200px' : '70px'"
+    style="height: 100%; background-color: #f0f0f0;"
+  >
     <rrp-header style="position: sticky; top: 0px; z-index: 777;"></rrp-header>
 
     <div style="flex: 1 0 auto; padding: 20px;">
