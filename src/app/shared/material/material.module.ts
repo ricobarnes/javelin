@@ -57,12 +57,12 @@ const mods = [
   MatStepperModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  MatSelectModule
+  MatSelectModule,
 ];
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, mods],
-  exports: [mods]
+  exports: [mods],
 })
 export class MaterialModule {}

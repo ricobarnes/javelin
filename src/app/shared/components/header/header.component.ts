@@ -14,7 +14,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleSidebar() {
+  toggleMainSidebar() {
     this._layoutService.toggleSidebar();
+  }
+
+  toggleSettingsDrawer() {
+    this._layoutService.setShowSettings(true);
   }
 }
