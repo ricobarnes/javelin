@@ -1,5 +1,7 @@
 # Javelin
 
+[Demo via GitLab Page](https://dp2-apps.gitlab.io/javelin/)
+
 [Google Doc Style Guide Documentation](https://docs.google.com/document/d/1aKvVkVI6j8MCFJtFOQChQG3EE9meDb9X_STDjTdNUMA/edit?usp=sharing)
 
 [Adobe XD Wireframes & Mockups](https://drive.google.com/drive/folders/1-HOilhQSl0cgzcpN2c24CU8DzRF7mGNs?usp=sharing)
