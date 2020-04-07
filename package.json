@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "build:gitlab": "ng build --base-href=/dp2-apps/javelin/",
+    "build:gitlab": "ng build --base-href=/javelin/",
     "test": "ng test --code-coverage",
     "test:headless": "ng test --code-coverage --browsers=ChromeHeadless --watch=false",
     "cov": "http-server -o ./coverage",
