@@ -5,7 +5,7 @@
 
 $custom-theme-primary: mat-palette($rrp_blue, 500, A100, A400);
 $custom-theme-accent: mat-palette($rrp_green, 500, A100, A400);
-$custom-theme-warn: mat-palette($mat-red);
+$custom-theme-warn: mat-palette($rrp_pink);
 
 $custom-theme: mat-light-theme(
   $custom-theme-primary,
@@ -84,7 +84,7 @@ $dynamic-theme-secondary: (
 $app-theme: mat-light-theme(
   mat-palette($dynamic-theme-primary),
   mat-palette($dynamic-theme-secondary),
-  mat-palette($mat-red)
+  mat-palette($rrp_pink)
 );
 
 @include angular-material-theme($app-theme);
