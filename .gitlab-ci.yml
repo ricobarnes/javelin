@@ -4,14 +4,11 @@ pages:
   cache:
     paths:
       - node_modules/
-
   stage: deploy
   script:
     - npm install -g @angular/cli@9.1.0
     - npm install
-    - ng build
-    - mv dist/javelin/* public/
-
+    - npm run build:gitlab
   artifacts:
     paths:
       - public
