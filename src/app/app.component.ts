@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LayoutService } from './core/services/layout/layout.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
-import * as tinycolor from 'tinycolor2';
+import tinycolor from 'tinycolor2';
+import { version } from '../../package.json';
 
 export interface Color {
   name: string;
@@ -16,11 +17,12 @@ export interface Color {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  isWide = true;
+  isSidebarWide = true;
+  version = version;
 
   settingsFormGroup: FormGroup = this._fb.group({
     phase: new FormControl(),
-    memberSort: new FormControl(),
+    status: new FormControl(),
     slideToggle1: new FormControl(),
     slideToggle2: new FormControl(),
   });
@@ -52,8 +54,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._layoutService.isWide().subscribe((val) => {
-      this.isWide = val;
+      this.isSidebarWide = val;
     });
+
+    this.version = `Version ${version}`;
   }
 
   ngAfterViewInit() {

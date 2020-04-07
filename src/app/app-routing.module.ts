@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './feature/pages/page-not-found/page-not-found.component';
 import { DashboardComponent } from './feature/pages/dashboard/dashboard.component';
+import { TasksComponent } from './feature/pages/tasks/tasks.component';
+import { ProjectsComponent } from './feature/pages/projects/projects.component';
+import { MetricsComponent } from './feature/pages/metrics/metrics.component';
 
 const routes: Routes = [
-  // { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
-  // {
-  //   path: 'tasks',
-  //   component: TasksComponent,
-  //   canActivate: [AuthGuard]
-  // },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'tasks', component: TasksComponent },
+  { path: 'metrics', component: MetricsComponent },
   {
     path: '',
     component: DashboardComponent,
