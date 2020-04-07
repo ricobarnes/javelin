@@ -10,9 +10,11 @@ pages:
     - npm install -g @angular/cli@9.1.0
     - npm install
     - ng build
+    - mv dist/javelin/* public/
+
   artifacts:
     paths:
-      - dist/javelin
+      - public
   only:
     - master
     - pages
