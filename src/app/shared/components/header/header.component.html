@@ -13,7 +13,7 @@
       </button>
     </div>
     <div style="display: flex; align-items: center;">
-      <button mat-icon-button color="primary">
+      <button mat-icon-button class="grey-color">
         <mat-icon
           class="material-icons-outlined"
           [matBadge]="notificationCount"
@@ -23,7 +23,7 @@
         >
       </button>
 
-      <button mat-icon-button color="primary">
+      <button mat-icon-button class="grey-color">
         <mat-icon
           class="material-icons-outlined"
           [matBadge]="messageCount"
@@ -33,11 +33,15 @@
         >
       </button>
 
-      <button mat-icon-button color="primary" (click)="toggleSettingsDrawer()">
+      <button
+        mat-icon-button
+        class="grey-color"
+        (click)="toggleSettingsDrawer()"
+      >
         <mat-icon class="material-icons-outlined">settings</mat-icon>
       </button>
 
-      <button mat-button color="primary" style="font-size: 12px;">
+      <button mat-button class="grey-color" style="font-size: 12px;">
         <mat-icon class="material-icons-outlined" style="margin-top: -2px;">
           account_circle
         </mat-icon>
