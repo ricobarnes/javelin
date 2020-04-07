@@ -169,7 +169,7 @@
       <form [formGroup]="settingsFormGroup">
         <div style="display: flex; flex-direction: column;">
           <fieldset>
-            <legend>Phases:</legend>
+            <legend>Phase</legend>
             <mat-radio-group
               aria-label="Select an option"
               formControlName="phase"
@@ -185,7 +185,7 @@
           </fieldset>
 
           <fieldset class="top-margin">
-            <legend>Statuses</legend>
+            <legend>Status</legend>
             <mat-radio-group
               aria-label="Select an option"
               formControlName="status"
@@ -219,6 +219,20 @@
               Option 2</mat-slide-toggle
             >
           </div>
+
+          <fieldset class="top-margin">
+            <legend>Primary Color</legend>
+            <button mat-button (click)="setPrimary('#d63031')">Red</button>
+            <button mat-button (click)="setPrimary('#344e5c')">Blue</button>
+            <button mat-button (click)="setPrimary('#00b894')">Green</button>
+          </fieldset>
+
+          <fieldset class="top-margin">
+            <legend>Secondary Color</legend>
+            <button mat-button (click)="setSecondary('#ffeaa7')">Yellow</button>
+            <button mat-button (click)="setSecondary('#74b9ff')">Blue</button>
+            <button mat-button (click)="setSecondary('#a29bfe')">Purple</button>
+          </fieldset>
         </div>
 
         <div class="top-margin">
