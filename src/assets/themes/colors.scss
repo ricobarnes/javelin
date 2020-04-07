@@ -1,3 +1,6 @@
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
 $rrp_blue: (
   50: #e7eaeb,
   100: #c2cace,
@@ -17,18 +20,18 @@ $rrp_blue: (
     50: #000000,
     100: #000000,
     200: #000000,
-    300: #ffffff,
-    400: #ffffff,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
     A100: #000000,
     A200: #000000,
-    A400: #ffffff,
-    A700: #ffffff
-  )
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ),
 );
 
 $rrp_green: (
@@ -52,16 +55,16 @@ $rrp_green: (
     200: #000000,
     300: #000000,
     400: #000000,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000,
+  ),
 );
 
 $rrp_peach: (
@@ -93,8 +96,8 @@ $rrp_peach: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000,
+  ),
 );
 
 $rrp_coral: (
@@ -126,8 +129,8 @@ $rrp_coral: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000,
+  ),
 );
 
 $rrp_red: (
@@ -151,14 +154,14 @@ $rrp_red: (
     200: #000000,
     300: #000000,
     400: #000000,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000,
+  ),
 );
