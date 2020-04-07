@@ -13,30 +13,38 @@
       </button>
     </div>
     <div style="display: flex; align-items: center;">
-      <button mat-icon-button color="primary">
+      <button mat-icon-button class="grey-color">
         <mat-icon
           class="material-icons-outlined"
           [matBadge]="notificationCount"
           matBadgeColor="warn"
+          matBadgeSize="small"
           >notifications</mat-icon
         >
       </button>
 
-      <button mat-icon-button color="primary">
+      <button mat-icon-button class="grey-color">
         <mat-icon
           class="material-icons-outlined"
           [matBadge]="messageCount"
           matBadgeColor="warn"
+          matBadgeSize="small"
           >email</mat-icon
         >
       </button>
 
-      <button mat-icon-button color="primary" (click)="toggleSettingsDrawer()">
+      <button
+        mat-icon-button
+        class="grey-color"
+        (click)="toggleSettingsDrawer()"
+      >
         <mat-icon class="material-icons-outlined">settings</mat-icon>
       </button>
 
-      <button mat-button color="primary" style="font-size: 12px;">
-        <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+      <button mat-button class="grey-color" style="font-size: 12px;">
+        <mat-icon class="material-icons-outlined" style="margin-top: -2px;">
+          account_circle
+        </mat-icon>
         Johnny Sample
       </button>
     </div>

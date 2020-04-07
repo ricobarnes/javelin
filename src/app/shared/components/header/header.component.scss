@@ -1,0 +1,21 @@
+@import 'src/assets/themes/custom-theme.scss';
+
+::ng-deep
+  .mat-badge-small.mat-badge-overlap.mat-badge-after
+  .mat-badge-content {
+  border: 1.5px solid mat-color($rrp_grey, 500);
+  color: white;
+  right: -10px;
+}
+
+::ng-deep
+  .mat-badge-medium.mat-badge-overlap.mat-badge-after
+  .mat-badge-content {
+  border: 1.5px solid mat-color($rrp_grey, 500);
+  color: white;
+  right: -15px;
+}
+
+.grey-color {
+  color: mat-color($rrp_grey, 500);
+}
