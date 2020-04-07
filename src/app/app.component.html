@@ -4,20 +4,163 @@
     [opened]="true"
     mode="side"
     class="sidenav mat-elevation-z4"
-    [style.width]="isWide ? '200px' : '70px'"
+    [style.width]="isSidebarWide ? '200px' : '50px'"
   >
-    <div>
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 20px;
-        "
+    <div
+      *ngIf="isSidebarWide; else showSmallSidebar"
+      style="display: flex; flex-direction: column; height: 100%;"
+    >
+      <div style="display: flex; justify-content: center;">
+        <img
+          src="https://via.placeholder.com/80x60.png"
+          class="md-logo"
+          [routerLink]="['/']"
+          style="padding: 15px;"
+        />
+      </div>
+
+      <button
+        mat-button
+        [routerLink]="['/']"
+        [routerLinkActive]="['sidenav-active-btn']"
+        [routerLinkActiveOptions]="{ exact: true }"
+        style="display: flex; height: 50px;"
       >
-        *** LOGO ***
+        <mat-icon class="material-icons-outlined sidenav-btn">home</mat-icon>
+        <span>Dashboard</span>
+      </button>
+      <button
+        mat-button
+        [routerLink]="['/projects']"
+        [routerLinkActive]="['sidenav-active-btn']"
+        style="display: flex; height: 50px;"
+      >
+        <mat-icon class="material-icons-outlined sidenav-btn">folder</mat-icon>
+        <span>Projects</span>
+      </button>
+      <button
+        mat-button
+        [routerLink]="['/tasks']"
+        [routerLinkActive]="['sidenav-active-btn']"
+        style="display: flex; height: 50px;"
+      >
+        <mat-icon class="material-icons-outlined sidenav-btn"
+          >playlist_add_check</mat-icon
+        >
+        <span>Tasks</span>
+      </button>
+      <button
+        mat-button
+        [routerLink]="['/metrics']"
+        [routerLinkActive]="['sidenav-active-btn']"
+        style="display: flex; height: 50px;"
+      >
+        <mat-icon class="material-icons-outlined sidenav-btn"
+          >bar_chart</mat-icon
+        >
+        <span>Metrics</span>
+      </button>
+
+      <div style="margin-top: auto;">
+        <p
+          style="
+            display: flex;
+            justify-content: center;
+            color: #ffffff78;
+            font-size: 12px;
+          "
+        >
+          {{ version }}
+        </p>
       </div>
     </div>
+    <ng-template #showSmallSidebar>
+      <div style="display: flex; flex-direction: column; height: 100%;">
+        <div style="display: flex; justify-content: center;">
+          <img
+            src="https://via.placeholder.com/30x30.png"
+            class="first-icon"
+            [routerLink]="['/']"
+            style="padding: 15px 0;"
+          />
+        </div>
+
+        <button
+          mat-button
+          [routerLink]="['/']"
+          [routerLinkActive]="['sidenav-active-btn']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          style="display: flex; height: 50px; min-width: unset !important;"
+        >
+          <mat-icon
+            class="material-icons-outlined sidenav-btn"
+            matTooltip="Dashboard"
+            matTooltipPosition="after"
+            >home</mat-icon
+          >
+        </button>
+        <button
+          mat-button
+          [routerLink]="['/projects']"
+          [routerLinkActive]="['sidenav-active-btn']"
+          style="display: flex; height: 50px; min-width: unset !important;"
+        >
+          <mat-icon
+            class="material-icons-outlined sidenav-btn"
+            matTooltip="Projects"
+            matTooltipPosition="right"
+            >folder</mat-icon
+          >
+        </button>
+        <button
+          mat-button
+          [routerLink]="['/tasks']"
+          [routerLinkActive]="['sidenav-active-btn']"
+          style="display: flex; height: 50px; min-width: unset !important;"
+        >
+          <mat-icon
+            class="material-icons-outlined sidenav-btn"
+            matTooltip="Tasks"
+            matTooltipPosition="right"
+            >playlist_add_check</mat-icon
+          >
+        </button>
+        <button
+          mat-button
+          [routerLink]="['/metrics']"
+          [routerLinkActive]="['sidenav-active-btn']"
+          style="display: flex; height: 50px; min-width: unset !important;"
+        >
+          <mat-icon
+            class="material-icons-outlined sidenav-btn"
+            matTooltip="Metrics"
+            matTooltipPosition="right"
+            >bar_chart</mat-icon
+          >
+        </button>
+
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            margin-top: auto;
+            margin-bottom: 2px;
+          "
+        >
+          <button
+            mat-button
+            style="display: flex; height: 50px; min-width: unset !important;"
+          >
+            <mat-icon
+              class="material-icons-outlined sidenav-btn"
+              [matTooltip]="version"
+              matTooltipPosition="right"
+              >help_outline</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </ng-template>
   </mat-drawer>
 
   <mat-drawer #settingsDrawer mode="over" position="end">
@@ -46,7 +189,7 @@
             <legend>Statuses</legend>
             <mat-radio-group
               aria-label="Select an option"
-              formControlName="memberSort"
+              formControlName="status"
             >
               <mat-radio-button
                 *ngFor="let op of example2Options"
@@ -94,7 +237,7 @@
   </mat-drawer>
 
   <mat-drawer-content
-    [style.margin-left]="isWide ? '200px' : '70px'"
+    [style.margin-left]="isSidebarWide ? '200px' : '50px'"
     style="height: 100vh; background-color: #f0f0f0;"
   >
     <rrp-header style="position: sticky; top: 0px; z-index: 777;"></rrp-header>
