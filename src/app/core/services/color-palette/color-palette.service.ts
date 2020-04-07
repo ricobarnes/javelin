@@ -52,7 +52,7 @@ export class ColorPaletteService {
     for (const color of this.secondaryColorPalette) {
       const key1 = `--theme-secondary-${color.name}`;
       const value1 = color.hex;
-      const key2 = `--theme-secondary-contrast-${color.name}`;
+      const key2 = `--theme-accent-contrast-${color.name}`;
       const value2 = color.darkContrast ? 'rgba(black, 0.87)' : 'white';
       document.documentElement.style.setProperty(key1, value1);
       document.documentElement.style.setProperty(key2, value2);
