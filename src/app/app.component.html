@@ -222,16 +222,64 @@
 
           <fieldset class="top-margin">
             <legend>Primary Color</legend>
-            <button mat-button (click)="setPrimary('#d63031')">Red</button>
-            <button mat-button (click)="setPrimary('#344e5c')">Blue</button>
-            <button mat-button (click)="setPrimary('#00b894')">Green</button>
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <mat-button-toggle-group (change)="primaryColorChange($event)">
+                <mat-button-toggle value="#344e5c">Blue</mat-button-toggle>
+                <mat-button-toggle value="#1e4a41">Green</mat-button-toggle>
+                <mat-button-toggle value="#3a285f">Purple</mat-button-toggle>
+                <mat-button-toggle value="#2d3436">Grey</mat-button-toggle>
+              </mat-button-toggle-group>
+
+              <div style="display: flex; justify-content: center;">
+                <div
+                  class="color-btn"
+                  [style.background]="primaryColor"
+                  [cpPosition]="'top-left'"
+                  [colorPicker]="primaryColor"
+                  (colorPickerChange)="
+                    onChangePrimaryColor($event); primaryColor = $event
+                  "
+                ></div>
+              </div>
+            </div>
           </fieldset>
 
           <fieldset class="top-margin">
             <legend>Secondary Color</legend>
-            <button mat-button (click)="setSecondary('#ffeaa7')">Yellow</button>
-            <button mat-button (click)="setSecondary('#74b9ff')">Blue</button>
-            <button mat-button (click)="setSecondary('#a29bfe')">Purple</button>
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <mat-button-toggle-group (change)="secondaryColorChange($event)">
+                <mat-button-toggle value="#00b894">Mint</mat-button-toggle>
+                <mat-button-toggle value="#f5aa00">Yellow</mat-button-toggle>
+                <mat-button-toggle value="#a29bfe">Purple</mat-button-toggle>
+                <mat-button-toggle value="#fab1a0">Peach</mat-button-toggle>
+              </mat-button-toggle-group>
+
+              <div style="display: flex; justify-content: center;">
+                <div
+                  class="color-btn"
+                  [style.background]="secondaryColor"
+                  [cpPosition]="'top-left'"
+                  [colorPicker]="secondaryColor"
+                  (colorPickerChange)="
+                    onChangeSecondaryColor($event); secondaryColor = $event
+                  "
+                ></div>
+              </div>
+            </div>
           </fieldset>
         </div>
 

@@ -10,7 +10,7 @@ mat-drawer-content {
 }
 
 .sidenav {
-  background-color: mat-color($dynamic-theme-primary, 700);
+  background-color: mat-color($dynamic-theme-primary, 500);
   color: white;
 }
 
@@ -25,4 +25,11 @@ mat-drawer-content {
 .sidenav-active-btn {
   background-color: mat-color($dynamic-theme-accent, 500);
   border-radius: 0;
+}
+
+.color-btn {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid mat-color($rrp_grey, 100);
+  border-radius: 50%;
 }
