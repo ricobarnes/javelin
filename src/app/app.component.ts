@@ -2,14 +2,9 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LayoutService } from './core/services/layout/layout.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
-import tinycolor from 'tinycolor2';
 import { version } from '../../package.json';
-
-export interface Color {
-  name: string;
-  hex: string;
-  darkContrast: boolean;
-}
+import { ColorPaletteService } from './core/services/color-palette/color-palette.service';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +20,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     status: new FormControl(),
     slideToggle1: new FormControl(),
     slideToggle2: new FormControl(),
+    primaryColorHex: new FormControl(),
+    secondaryColorHex: new FormControl(),
   });
 
   example1Options = [
-    { name: 'Phase 1', id: 1 },
-    { name: 'Phase 2', id: 2 },
+    { name: 'Phase 1', id: 0 },
+    { name: 'Phase 2', id: 1 },
   ];
 
   example2Options = [
@@ -39,17 +36,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     { name: 'Completed', id: 3 },
   ];
 
+  primaryColor: string = this._colorPaletteService.primaryColor;
+  secondaryColor: string = this._colorPaletteService.secondaryColor;
+
   @ViewChild('mainDrawer') mainDrawer: MatDrawer;
   @ViewChild('settingsDrawer') settingsDrawer: MatDrawer;
 
-  primaryColor = '#344e5c';
-  primaryColorPalette: Color[] = [];
-  secondaryColor = '#00b894';
-  secondaryColorPalette: Color[] = [];
-
-  constructor(private _layoutService: LayoutService, private _fb: FormBuilder) {
-    this.savePrimaryColor();
-    this.saveSecondaryColor();
+  constructor(
+    private _layoutService: LayoutService,
+    private _fb: FormBuilder,
+    private _colorPaletteService: ColorPaletteService
+  ) {
+    this._colorPaletteService.initColorPalette();
   }
 
   ngOnInit() {
@@ -58,6 +56,27 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
 
     this.version = `Version ${version}`;
+
+    this.settingsFormGroup.patchValue({
+      phase: 0,
+      status: 1,
+      slideToggle1: true,
+      slideToggle2: false,
+      primaryColorHex: this._colorPaletteService.primaryColor,
+      secondaryColorHex: this._colorPaletteService.secondaryColor,
+    });
+
+    this.settingsFormGroup.valueChanges.subscribe((val) => {
+      console.log('val', val);
+      console.log('primaryColorHex', val.primaryColorHex);
+      console.log('secondaryColorHex', val.secondaryColorHex);
+
+      const primary = val.primaryColorHex;
+      const secondary = val.secondaryColorHex;
+
+      this._colorPaletteService.savePrimaryColor(primary);
+      this._colorPaletteService.saveSecondaryColor(secondary);
+    });
   }
 
   ngAfterViewInit() {
@@ -74,57 +93,37 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.settingsDrawer.close();
   }
 
-  savePrimaryColor() {
-    this.primaryColorPalette = computeColors(this.primaryColor);
+  primaryColorChange(val: MatButtonToggleChange) {
+    console.log('val', val.source.value);
+    // this.setPrimary(val.source.value);
+    this.primaryColor = val.source.value;
 
-    for (const color of this.primaryColorPalette) {
-      const key1 = `--theme-primary-${color.name}`;
-      const value1 = color.hex;
-      const key2 = `--theme-primary-contrast-${color.name}`;
-      const value2 = color.darkContrast ? 'rgba(black, 0.87)' : 'white';
-      document.documentElement.style.setProperty(key1, value1);
-      document.documentElement.style.setProperty(key2, value2);
-    }
+    this.settingsFormGroup.get('primaryColorHex').setValue(val.source.value);
   }
 
-  saveSecondaryColor() {
-    this.secondaryColorPalette = computeColors(this.secondaryColor);
+  secondaryColorChange(val: MatButtonToggleChange) {
+    console.log('val', val.source.value);
+    // this.setSecondary(val.source.value);
+    this.secondaryColor = val.source.value;
 
-    for (const color of this.secondaryColorPalette) {
-      const key1 = `--theme-secondary-${color.name}`;
-      const value1 = color.hex;
-      const key2 = `--theme-secondary-contrast-${color.name}`;
-      const value2 = color.darkContrast ? 'rgba(black, 0.87)' : 'white';
-      document.documentElement.style.setProperty(key1, value1);
-      document.documentElement.style.setProperty(key2, value2);
-    }
+    this.settingsFormGroup.get('secondaryColorHex').setValue(val.source.value);
   }
-}
 
-function computeColors(hex: string): Color[] {
-  return [
-    getColorObject(tinycolor(hex).lighten(52), '50'),
-    getColorObject(tinycolor(hex).lighten(37), '100'),
-    getColorObject(tinycolor(hex).lighten(26), '200'),
-    getColorObject(tinycolor(hex).lighten(12), '300'),
-    getColorObject(tinycolor(hex).lighten(6), '400'),
-    getColorObject(tinycolor(hex), '500'),
-    getColorObject(tinycolor(hex).darken(6), '600'),
-    getColorObject(tinycolor(hex).darken(12), '700'),
-    getColorObject(tinycolor(hex).darken(18), '800'),
-    getColorObject(tinycolor(hex).darken(24), '900'),
-    getColorObject(tinycolor(hex).lighten(50).saturate(30), 'A100'),
-    getColorObject(tinycolor(hex).lighten(30).saturate(30), 'A200'),
-    getColorObject(tinycolor(hex).lighten(10).saturate(15), 'A400'),
-    getColorObject(tinycolor(hex).lighten(5).saturate(5), 'A700'),
-  ];
-}
+  setPrimary(colorHex: string) {
+    this._colorPaletteService.savePrimaryColor(colorHex);
+  }
 
-function getColorObject(value, name): Color {
-  const c = tinycolor(value);
-  return {
-    name: name,
-    hex: c.toHexString(),
-    darkContrast: c.isLight(),
-  };
+  setSecondary(colorHex: string) {
+    this._colorPaletteService.saveSecondaryColor(colorHex);
+  }
+
+  onChangePrimaryColor(color) {
+    console.log('color', color);
+    this.settingsFormGroup.get('primaryColorHex').setValue(color);
+  }
+
+  onChangeSecondaryColor(color) {
+    console.log('color', color);
+    this.settingsFormGroup.get('secondaryColorHex').setValue(color);
+  }
 }
