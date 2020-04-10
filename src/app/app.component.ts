@@ -90,6 +90,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   saveSettings() {
     console.log('Save Settings');
 
+    console.log('settingsFormGroup', this.settingsFormGroup);
+    console.log('settingsFormGroup value', this.settingsFormGroup.value);
+
+    localStorage.setItem('primaryColorHex', this.primaryColor);
+    localStorage.setItem('secondaryColorHex', this.secondaryColor);
+
     this.settingsDrawer.close();
   }
 

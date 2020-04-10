@@ -11,9 +11,9 @@ export interface Color {
   providedIn: 'root',
 })
 export class ColorPaletteService {
-  primaryColor = '#344e5c';
+  primaryColor = localStorage.getItem('primaryColorHex') || '#344e5c';
   primaryColorPalette: Color[] = [];
-  secondaryColor = '#00b894';
+  secondaryColor = localStorage.getItem('secondaryColorHex') || '#00b894';
   secondaryColorPalette: Color[] = [];
 
   constructor() {}
