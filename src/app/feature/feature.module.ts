@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { MetricsComponent } from './pages/metrics/metrics.component';
+import { ProjectDialogComponent } from './dialogs/project-dialog/project-dialog.component';
 
 @NgModule({
-  declarations: [PageNotFoundComponent, DashboardComponent, ProjectsComponent, TasksComponent, MetricsComponent],
+  declarations: [PageNotFoundComponent, DashboardComponent, ProjectsComponent, TasksComponent, MetricsComponent, ProjectDialogComponent],
   imports: [CommonModule, SharedModule],
 })
 export class FeatureModule {}
