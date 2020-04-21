@@ -113,7 +113,9 @@ export class ProjectDialogComponent implements OnInit {
     this.projectFormGroup.patchValue({
       name: `TESTER-${this.data.currentCount + 1} Really Long Name `,
       number: `###-${this.data.currentCount + 1}`,
-      description: `Example-${this.data.currentCount + 1}`,
+      description: `Example-${
+        this.data.currentCount + 1
+      } Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Vestibulum lorem sed risus ultricies. Nisl purus in mollis nunc sed id.`,
       publicationDate: new Date(),
       reviewer: `Reviewer-${this.data.currentCount + 1}`,
       type: `Type-${this.data.currentCount + 1}`,
