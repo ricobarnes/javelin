@@ -24,7 +24,7 @@ export class ColorPaletteService {
   }
 
   savePrimaryColor(colorHex = this.primaryColor) {
-    console.log('colorHex', colorHex);
+    // console.log('colorHex', colorHex);
 
     this.primaryColor = colorHex;
 
@@ -39,11 +39,11 @@ export class ColorPaletteService {
       document.documentElement.style.setProperty(key2, value2);
     }
 
-    console.log('DONE');
+    // console.log('DONE');
   }
 
   saveSecondaryColor(colorHex = this.secondaryColor) {
-    console.log('colorHex', colorHex);
+    // console.log('colorHex', colorHex);
 
     this.secondaryColor = colorHex;
 
@@ -58,7 +58,7 @@ export class ColorPaletteService {
       document.documentElement.style.setProperty(key2, value2);
     }
 
-    console.log('DONE');
+    // console.log('DONE');
   }
 
   private computeColors(hex: string): Color[] {
