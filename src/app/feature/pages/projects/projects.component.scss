@@ -63,6 +63,19 @@
   padding-right: 14px;
 }
 
+.mat-column-reviewer {
+  min-width: 50px !important;
+  // width: 320px !important;
+  max-width: 200px !important;
+  // flex: 0 0 28% !important;
+  // width: 10% !important;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 14px;
+}
+
 .mat-column-books {
   min-width: 50px !important;
   // width: 320px !important;
