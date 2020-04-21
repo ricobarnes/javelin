@@ -8,8 +8,13 @@
     "
   >
     <div>
-      <button mat-icon-button color="primary" (click)="toggleMainSidebar()">
-        <mat-icon>menu</mat-icon>
+      <button mat-icon-button (click)="toggleMainSidebar()">
+        <mat-icon *ngIf="isWide" color="accent"
+          >format_indent_decrease</mat-icon
+        >
+        <mat-icon *ngIf="!isWide" color="accent"
+          >format_indent_increase</mat-icon
+        >
       </button>
     </div>
     <div style="display: flex; align-items: center;">

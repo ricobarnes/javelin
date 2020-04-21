@@ -9,10 +9,15 @@ import { LayoutService } from 'src/app/core/services/layout/layout.service';
 export class HeaderComponent implements OnInit {
   notificationCount = '1';
   messageCount = '9+';
+  isWide = true;
 
   constructor(private _layoutService: LayoutService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._layoutService.isWide().subscribe((isWide) => {
+      this.isWide = isWide;
+    });
+  }
 
   toggleMainSidebar() {
     this._layoutService.toggleSidebar();

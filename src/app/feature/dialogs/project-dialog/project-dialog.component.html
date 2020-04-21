@@ -1,0 +1,166 @@
+<h2 mat-dialog-title>Create a New Project</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="projectFormGroup">
+      <div class="form-container">
+        <form [formGroup]="projectFormGroup">
+          <ng-template matStepLabel>Project Details</ng-template>
+
+          <div>
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <input matInput placeholder="" formControlName="type" required />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Last name, First name"
+                formControlName="name"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Number</mat-label>
+              <input
+                matInput
+                placeholder="###-####"
+                formControlName="number"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field style="width: 100%;">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                placeholder="Ex. Once upon a time..."
+                formControlName="description"
+                required
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <mat-label>Publication Date</mat-label>
+              <input
+                matInput
+                placeholder="MM/DD/YYYY"
+                formControlName="publicationDate"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Reviewer</mat-label>
+              <input
+                matInput
+                placeholder="Review Name"
+                formControlName="reviewer"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Tags</mat-label>
+              <input matInput placeholder="" formControlName="tags" required />
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="requesterFormGroup">
+      <div class="form-container">
+        <form [formGroup]="requesterFormGroup">
+          <ng-template matStepLabel>Requester Info</ng-template>
+          <mat-form-field>
+            <mat-label>Author Name</mat-label>
+            <input
+              matInput
+              formControlName="author"
+              placeholder="Ex. Jane Doe"
+              required
+            />
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="documentFormGroup" optional="true">
+      <div class="form-container">
+        <form [formGroup]="documentFormGroup">
+          <ng-template matStepLabel>Documents</ng-template>
+          <mat-form-field>
+            <mat-label>Books</mat-label>
+            <input
+              matInput
+              formControlName="books"
+              placeholder="Ex. Book Title"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Articles</mat-label>
+            <input
+              matInput
+              formControlName="articles"
+              placeholder="Ex. Article Title"
+              required
+            />
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Review</ng-template>
+      <p>You are now done.</p>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+<mat-dialog-actions style="display: flex; justify-content: space-between;">
+  <div>
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+  </div>
+
+  <div *ngIf="!loading; else saving">
+    <button mat-button (click)="testAutofillForm()">
+      Autofill
+    </button>
+
+    <button
+      mat-button
+      (click)="previousStep()"
+      *ngIf="stepper?.selectedIndex > 0"
+    >
+      Back
+    </button>
+    <button
+      mat-button
+      (click)="nextStep()"
+      *ngIf="stepper?.selectedIndex < stepper?.steps?.length - 1"
+    >
+      Next
+    </button>
+
+    <button
+      mat-raised-button
+      cdkFocusInitial
+      *ngIf="stepper.selectedIndex === stepper?.steps?.length - 1"
+      color="primary"
+      (click)="create()"
+    >
+      Create
+    </button>
+  </div>
+
+  <ng-template #saving>
+    <mat-spinner color="accent" diameter="20"></mat-spinner>
+  </ng-template>
+</mat-dialog-actions>

@@ -30,3 +30,80 @@ body {
 .top-margin {
   margin-top: 20px;
 }
+
+.header-title {
+  font-weight: 400;
+}
+
+.table-filter-bar {
+  font-size: 14px;
+  width: 100%;
+}
+
+fieldset {
+  display: flex;
+  padding: 0 10px 10px;
+  border: 1px solid #666;
+  border-radius: 4px;
+}
+
+legend {
+  width: auto;
+  font-size: 14px;
+  padding: 2px 4px;
+  background: #fff;
+}
+
+fieldset > legend {
+  float: left;
+  margin-top: -20px;
+}
+
+fieldset > legend + * {
+  clear: both;
+}
+
+.top-margin {
+  margin-top: 20px;
+}
+
+.form-container {
+  margin-top: 10px;
+}
+
+.form-container .mat-form-field + .mat-form-field {
+  margin-left: 10px;
+}
+
+mat-dialog-container {
+  border-radius: 0px !important;
+}
+
+mat-form-field {
+  margin-bottom: 10px;
+}
+
+.tooltip-newline {
+  white-space: pre-line;
+}
+
+.table-actions-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -16px;
+}
+
+.table-actions-btns {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  padding-bottom: 15px;
+}
+
+.table-header-btns {
+  margin-left: 5px;
+}
+
+.disabled-color {
+  color: #bdbdbd !important;
+}
