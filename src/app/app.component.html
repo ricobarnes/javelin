@@ -1,310 +1,395 @@
 <mat-drawer-container class="rrp-drawer-container">
   <mat-drawer
-    #mainDrawer
-    [opened]="true"
-    mode="side"
-    class="sidenav mat-elevation-z4"
-    [style.width]="isSidebarWide ? '200px' : '50px'"
+    #searchDrawer
+    [opened]="false"
+    mode="over"
+    class="search-drawer mat-elevation-z4"
   >
-    <div
-      *ngIf="isSidebarWide; else showSmallSidebar"
-      style="display: flex; flex-direction: column; height: 100%;"
-    >
-      <div style="display: flex; justify-content: center;">
-        <img
-          src="assets/images/javelin_logo_concept_light.png"
-          class="javelin-logo"
-          [routerLink]="['/']"
-        />
-      </div>
-
+    <div class="search-wrap">
       <button
-        mat-button
-        [routerLink]="['/']"
-        [routerLinkActive]="['sidenav-active-btn']"
-        [routerLinkActiveOptions]="{ exact: true }"
-        style="display: flex; height: 50px;"
+        mat-icon-button
+        style="margin-top: 8px;"
+        (click)="searchDrawer.close()"
       >
-        <mat-icon class="material-icons-outlined sidenav-btn">home</mat-icon>
-        <span>Dashboard</span>
-      </button>
-      <button
-        mat-button
-        [routerLink]="['/projects']"
-        [routerLinkActive]="['sidenav-active-btn']"
-        style="display: flex; height: 50px;"
-      >
-        <mat-icon class="material-icons-outlined sidenav-btn">folder</mat-icon>
-        <span>Projects</span>
-      </button>
-      <button
-        mat-button
-        [routerLink]="['/tasks']"
-        [routerLinkActive]="['sidenav-active-btn']"
-        style="display: flex; height: 50px;"
-      >
-        <mat-icon class="material-icons-outlined sidenav-btn"
-          >playlist_add_check</mat-icon
-        >
-        <span>Tasks</span>
-      </button>
-      <button
-        mat-button
-        [routerLink]="['/metrics']"
-        [routerLinkActive]="['sidenav-active-btn']"
-        style="display: flex; height: 50px;"
-      >
-        <mat-icon class="material-icons-outlined sidenav-btn"
-          >bar_chart</mat-icon
-        >
-        <span>Metrics</span>
+        <mat-icon>keyboard_backspace</mat-icon>
       </button>
 
-      <div style="margin-top: auto;">
-        <p
-          style="
-            display: flex;
-            justify-content: center;
-            color: #ffffff78;
-            font-size: 12px;
-          "
-        >
-          {{ version }}
-        </p>
-      </div>
-    </div>
-    <ng-template #showSmallSidebar>
-      <div style="display: flex; flex-direction: column; height: 100%;">
-        <div style="display: flex; justify-content: center;">
-          <img
-            src="assets/images/javelin_icon.png"
-            class="first-icon"
-            [routerLink]="['/']"
-            class="javelin-icon"
-          />
-        </div>
-
-        <button
-          mat-button
-          [routerLink]="['/']"
-          [routerLinkActive]="['sidenav-active-btn']"
-          [routerLinkActiveOptions]="{ exact: true }"
-          style="display: flex; height: 50px; min-width: unset !important;"
-        >
-          <mat-icon
-            class="material-icons-outlined sidenav-btn"
-            matTooltip="Dashboard"
-            matTooltipPosition="after"
-            >home</mat-icon
-          >
-        </button>
-        <button
-          mat-button
-          [routerLink]="['/projects']"
-          [routerLinkActive]="['sidenav-active-btn']"
-          style="display: flex; height: 50px; min-width: unset !important;"
-        >
-          <mat-icon
-            class="material-icons-outlined sidenav-btn"
-            matTooltip="Projects"
-            matTooltipPosition="right"
-            >folder</mat-icon
-          >
-        </button>
-        <button
-          mat-button
-          [routerLink]="['/tasks']"
-          [routerLinkActive]="['sidenav-active-btn']"
-          style="display: flex; height: 50px; min-width: unset !important;"
-        >
-          <mat-icon
-            class="material-icons-outlined sidenav-btn"
-            matTooltip="Tasks"
-            matTooltipPosition="right"
-            >playlist_add_check</mat-icon
-          >
-        </button>
-        <button
-          mat-button
-          [routerLink]="['/metrics']"
-          [routerLinkActive]="['sidenav-active-btn']"
-          style="display: flex; height: 50px; min-width: unset !important;"
-        >
-          <mat-icon
-            class="material-icons-outlined sidenav-btn"
-            matTooltip="Metrics"
-            matTooltipPosition="right"
-            >bar_chart</mat-icon
-          >
-        </button>
-
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            margin-top: auto;
-            margin-bottom: 2px;
-          "
-        >
-          <button
-            mat-button
-            style="display: flex; height: 50px; min-width: unset !important;"
-          >
-            <mat-icon
-              class="material-icons-outlined sidenav-btn"
-              [matTooltip]="version"
-              matTooltipPosition="right"
-              >help_outline</mat-icon
-            >
-          </button>
-        </div>
-      </div>
-    </ng-template>
-  </mat-drawer>
-
-  <mat-drawer #settingsDrawer mode="over" position="end">
-    <div style="display: flex; flex-direction: column; padding: 30px;">
-      <h2>System Settings</h2>
-
-      <form [formGroup]="settingsFormGroup">
-        <div style="display: flex; flex-direction: column;">
-          <fieldset>
-            <legend>Phase</legend>
-            <mat-radio-group
-              aria-label="Select an option"
-              formControlName="phase"
-            >
-              <mat-radio-button
-                *ngFor="let op of example1Options"
-                [value]="op.id"
-                name="opList"
-                style="margin: 10px;"
-                >{{ op.name }}</mat-radio-button
-              >
-            </mat-radio-group>
-          </fieldset>
-
-          <fieldset class="top-margin">
-            <legend>Status</legend>
-            <mat-radio-group
-              aria-label="Select an option"
-              formControlName="status"
-            >
-              <mat-radio-button
-                *ngFor="let op of example2Options"
-                [value]="op.id"
-                name="opList"
-                style="margin: 10px;"
-                >{{ op.name }}</mat-radio-button
-              >
-            </mat-radio-group>
-          </fieldset>
-
-          <div class="top-margin">
-            <mat-slide-toggle
-              style="margin: 10px;"
-              formControlName="slideToggle1"
-              [checked]="settingsFormGroup.controls.slideToggle1?.value"
-            >
-              Option 1</mat-slide-toggle
-            >
-          </div>
-
-          <div class="top-margin">
-            <mat-slide-toggle
-              style="margin: 10px;"
-              formControlName="slideToggle2"
-              [checked]="settingsFormGroup.controls.slideToggle2?.value"
-            >
-              Option 2</mat-slide-toggle
-            >
-          </div>
-
-          <fieldset class="top-margin">
-            <legend>Primary Color</legend>
-
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              "
-            >
-              <mat-button-toggle-group (change)="primaryColorChange($event)">
-                <mat-button-toggle value="#344e5c">Blue</mat-button-toggle>
-                <mat-button-toggle value="#1e4a41">Green</mat-button-toggle>
-                <mat-button-toggle value="#3a285f">Purple</mat-button-toggle>
-                <mat-button-toggle value="#2d3436">Grey</mat-button-toggle>
-              </mat-button-toggle-group>
-
-              <div style="display: flex; justify-content: center;">
-                <div
-                  class="color-btn"
-                  [style.background]="primaryColor"
-                  [cpPosition]="'top-left'"
-                  [colorPicker]="primaryColor"
-                  (colorPickerChange)="
-                    onChangePrimaryColor($event); primaryColor = $event
-                  "
-                ></div>
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="top-margin">
-            <legend>Secondary Color</legend>
-
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              "
-            >
-              <mat-button-toggle-group (change)="secondaryColorChange($event)">
-                <mat-button-toggle value="#00b894">Mint</mat-button-toggle>
-                <mat-button-toggle value="#f5aa00">Yellow</mat-button-toggle>
-                <mat-button-toggle value="#a29bfe">Purple</mat-button-toggle>
-                <mat-button-toggle value="#fab1a0">Peach</mat-button-toggle>
-              </mat-button-toggle-group>
-
-              <div style="display: flex; justify-content: center;">
-                <div
-                  class="color-btn"
-                  [style.background]="secondaryColor"
-                  [cpPosition]="'top-left'"
-                  [colorPicker]="secondaryColor"
-                  (colorPickerChange)="
-                    onChangeSecondaryColor($event); secondaryColor = $event
-                  "
-                ></div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
-        <div class="top-margin">
-          <button
-            mat-raised-button
-            color="accent"
-            style="width: 100%;"
-            (click)="saveSettings()"
-          >
-            Save
-          </button>
-        </div>
+      <form
+        class="example-form"
+        style="display: flex; width: 100%; padding: 0 10px;"
+      >
+        <mat-form-field class="example-full-width" floatLabel="never">
+          <mat-label>Type to search</mat-label>
+          <input matInput placeholder="Ex. Pizza" cdkFocusInitial />
+        </mat-form-field>
       </form>
     </div>
   </mat-drawer>
 
-  <mat-drawer-content
-    [style.margin-left]="isSidebarWide ? '200px' : '50px'"
-    style="height: 100vh; background-color: #f0f0f0;"
-  >
-    <rrp-header style="position: sticky; top: 0px; z-index: 777;"></rrp-header>
+  <mat-drawer-content style="height: 100vh; background-color: #f0f0f0;">
+    <mat-sidenav-container class="rrp-drawer-container">
+      <mat-sidenav
+        #mainDrawer
+        [opened]="true"
+        mode="side"
+        class="sidenav mat-elevation-z4"
+        [style.width]="isSidebarWide ? '200px' : '50px'"
+      >
+        <div
+          *ngIf="isSidebarWide; else showSmallSidebar"
+          style="display: flex; flex-direction: column; height: 100%;"
+        >
+          <div style="display: flex; justify-content: center;">
+            <img
+              src="assets/images/javelin_logo_concept_light.png"
+              class="javelin-logo"
+              [routerLink]="['/']"
+            />
+          </div>
 
-    <div style="flex: 1 0 auto; padding: 20px;">
-      <router-outlet></router-outlet>
-    </div>
+          <button
+            mat-button
+            [routerLink]="['/']"
+            [routerLinkActive]="['sidenav-active-btn']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            style="display: flex; height: 50px;"
+          >
+            <mat-icon class="material-icons-outlined sidenav-btn"
+              >home</mat-icon
+            >
+            <span>Dashboard</span>
+          </button>
+          <button
+            mat-button
+            [routerLink]="['/projects']"
+            [routerLinkActive]="['sidenav-active-btn']"
+            style="display: flex; height: 50px;"
+          >
+            <mat-icon class="material-icons-outlined sidenav-btn"
+              >folder</mat-icon
+            >
+            <span>Projects</span>
+          </button>
+          <button
+            mat-button
+            [routerLink]="['/tasks']"
+            [routerLinkActive]="['sidenav-active-btn']"
+            style="display: flex; height: 50px;"
+          >
+            <mat-icon class="material-icons-outlined sidenav-btn"
+              >playlist_add_check</mat-icon
+            >
+            <span>Tasks</span>
+          </button>
+          <button
+            mat-button
+            [routerLink]="['/metrics']"
+            [routerLinkActive]="['sidenav-active-btn']"
+            style="display: flex; height: 50px;"
+          >
+            <mat-icon class="material-icons-outlined sidenav-btn"
+              >bar_chart</mat-icon
+            >
+            <span>Metrics</span>
+          </button>
+          <button
+            mat-button
+            (click)="openSearchDrawer()"
+            [routerLinkActive]="['sidenav-active-btn']"
+            style="display: flex; height: 50px;"
+          >
+            <mat-icon class="material-icons-outlined sidenav-btn"
+              >search</mat-icon
+            >
+            <span>Search</span>
+          </button>
+
+          <div style="margin-top: auto;">
+            <p
+              style="
+                display: flex;
+                justify-content: center;
+                color: #ffffff78;
+                font-size: 12px;
+              "
+            >
+              {{ version }}
+            </p>
+          </div>
+        </div>
+        <ng-template #showSmallSidebar>
+          <div style="display: flex; flex-direction: column; height: 100%;">
+            <div style="display: flex; justify-content: center;">
+              <img
+                src="assets/images/javelin_icon.png"
+                class="first-icon"
+                [routerLink]="['/']"
+                class="javelin-icon"
+              />
+            </div>
+
+            <button
+              mat-button
+              [routerLink]="['/']"
+              [routerLinkActive]="['sidenav-active-btn']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              style="display: flex; height: 50px; min-width: unset !important;"
+            >
+              <mat-icon
+                class="material-icons-outlined sidenav-btn"
+                matTooltip="Dashboard"
+                matTooltipPosition="after"
+                >home</mat-icon
+              >
+            </button>
+            <button
+              mat-button
+              [routerLink]="['/projects']"
+              [routerLinkActive]="['sidenav-active-btn']"
+              style="display: flex; height: 50px; min-width: unset !important;"
+            >
+              <mat-icon
+                class="material-icons-outlined sidenav-btn"
+                matTooltip="Projects"
+                matTooltipPosition="right"
+                >folder</mat-icon
+              >
+            </button>
+            <button
+              mat-button
+              [routerLink]="['/tasks']"
+              [routerLinkActive]="['sidenav-active-btn']"
+              style="display: flex; height: 50px; min-width: unset !important;"
+            >
+              <mat-icon
+                class="material-icons-outlined sidenav-btn"
+                matTooltip="Tasks"
+                matTooltipPosition="right"
+                >playlist_add_check</mat-icon
+              >
+            </button>
+            <button
+              mat-button
+              [routerLink]="['/metrics']"
+              [routerLinkActive]="['sidenav-active-btn']"
+              style="display: flex; height: 50px; min-width: unset !important;"
+            >
+              <mat-icon
+                class="material-icons-outlined sidenav-btn"
+                matTooltip="Metrics"
+                matTooltipPosition="right"
+                >bar_chart</mat-icon
+              >
+            </button>
+            <button
+              mat-button
+              (click)="openSearchDrawer()"
+              [routerLinkActive]="['sidenav-active-btn']"
+              style="display: flex; height: 50px; min-width: unset !important;"
+            >
+              <mat-icon
+                class="material-icons-outlined sidenav-btn"
+                matTooltip="Search"
+                matTooltipPosition="right"
+                >search</mat-icon
+              >
+            </button>
+
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-top: auto;
+                margin-bottom: 2px;
+              "
+            >
+              <button
+                mat-button
+                style="
+                  display: flex;
+                  height: 50px;
+                  min-width: unset !important;
+                "
+              >
+                <mat-icon
+                  class="material-icons-outlined sidenav-btn"
+                  [matTooltip]="version"
+                  matTooltipPosition="right"
+                  >help_outline</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </mat-sidenav>
+
+      <mat-sidenav #settingsDrawer mode="over" position="end">
+        <div style="display: flex; flex-direction: column; padding: 30px;">
+          <div style="display: flex; justify-content: space-between;">
+            <h2>System Settings</h2>
+
+            <button
+              mat-icon-button
+              (click)="settingsDrawer.close()"
+              style="margin-top: -5px;"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+
+          <form [formGroup]="settingsFormGroup">
+            <div style="display: flex; flex-direction: column;">
+              <fieldset>
+                <legend>Phase</legend>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="phase"
+                >
+                  <mat-radio-button
+                    *ngFor="let op of example1Options"
+                    [value]="op.id"
+                    name="opList"
+                    style="margin: 10px;"
+                    >{{ op.name }}</mat-radio-button
+                  >
+                </mat-radio-group>
+              </fieldset>
+
+              <fieldset class="top-margin">
+                <legend>Status</legend>
+                <mat-radio-group
+                  aria-label="Select an option"
+                  formControlName="status"
+                >
+                  <mat-radio-button
+                    *ngFor="let op of example2Options"
+                    [value]="op.id"
+                    name="opList"
+                    style="margin: 10px;"
+                    >{{ op.name }}</mat-radio-button
+                  >
+                </mat-radio-group>
+              </fieldset>
+
+              <div class="top-margin">
+                <mat-slide-toggle
+                  style="margin: 10px;"
+                  formControlName="slideToggle1"
+                  [checked]="settingsFormGroup.controls.slideToggle1?.value"
+                >
+                  Option 1</mat-slide-toggle
+                >
+              </div>
+
+              <div class="top-margin">
+                <mat-slide-toggle
+                  style="margin: 10px;"
+                  formControlName="slideToggle2"
+                  [checked]="settingsFormGroup.controls.slideToggle2?.value"
+                >
+                  Option 2</mat-slide-toggle
+                >
+              </div>
+
+              <fieldset class="top-margin">
+                <legend>Primary Color</legend>
+
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <mat-button-toggle-group
+                    (change)="primaryColorChange($event)"
+                  >
+                    <mat-button-toggle value="#344e5c">Blue</mat-button-toggle>
+                    <mat-button-toggle value="#1e4a41">Green</mat-button-toggle>
+                    <mat-button-toggle value="#3a285f"
+                      >Purple</mat-button-toggle
+                    >
+                    <mat-button-toggle value="#2d3436">Grey</mat-button-toggle>
+                  </mat-button-toggle-group>
+
+                  <div style="display: flex; justify-content: center;">
+                    <div
+                      class="color-btn"
+                      [style.background]="primaryColor"
+                      [cpPosition]="'top-left'"
+                      [colorPicker]="primaryColor"
+                      (colorPickerChange)="
+                        onChangePrimaryColor($event); primaryColor = $event
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="top-margin">
+                <legend>Secondary Color</legend>
+
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <mat-button-toggle-group
+                    (change)="secondaryColorChange($event)"
+                  >
+                    <mat-button-toggle value="#00b894">Mint</mat-button-toggle>
+                    <mat-button-toggle value="#f5aa00"
+                      >Yellow</mat-button-toggle
+                    >
+                    <mat-button-toggle value="#a29bfe"
+                      >Purple</mat-button-toggle
+                    >
+                    <mat-button-toggle value="#fab1a0">Peach</mat-button-toggle>
+                  </mat-button-toggle-group>
+
+                  <div style="display: flex; justify-content: center;">
+                    <div
+                      class="color-btn"
+                      [style.background]="secondaryColor"
+                      [cpPosition]="'top-left'"
+                      [colorPicker]="secondaryColor"
+                      (colorPickerChange)="
+                        onChangeSecondaryColor($event); secondaryColor = $event
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="top-margin">
+              <button
+                mat-raised-button
+                color="accent"
+                style="width: 100%;"
+                (click)="saveSettings()"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content
+        [style.margin-left]="isSidebarWide ? '200px' : '50px'"
+        style="height: 100vh; background-color: #f0f0f0;"
+      >
+        <rrp-header
+          style="position: sticky; top: 0px; z-index: 777;"
+        ></rrp-header>
+
+        <div style="flex: 1 0 auto; padding: 20px;">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </mat-drawer-content>
 </mat-drawer-container>

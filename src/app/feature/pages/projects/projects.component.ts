@@ -63,6 +63,9 @@ export class ProjectsComponent implements OnInit {
         this.dataSource.data = updatedList;
         localStorage.setItem('projectList', JSON.stringify(updatedList));
       }
+      const pList = localStorage.getItem('projectList');
+
+      console.log('*** pList', pList);
     });
   }
 

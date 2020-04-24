@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 import { LayoutService } from './core/services/layout/layout.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -40,7 +46,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   secondaryColor: string = this._colorPaletteService.secondaryColor;
 
   @ViewChild('mainDrawer') mainDrawer: MatDrawer;
+  @ViewChild('searchDrawer') searchDrawer: MatDrawer;
   @ViewChild('settingsDrawer') settingsDrawer: MatDrawer;
+  // @ViewChild('searchInput') searchInput: ElementRef;
 
   constructor(
     private _layoutService: LayoutService,
@@ -131,5 +139,23 @@ export class AppComponent implements OnInit, AfterViewInit {
   onChangeSecondaryColor(color) {
     console.log('color', color);
     this.settingsFormGroup.get('secondaryColorHex').setValue(color);
+  }
+
+  openSearchDrawer() {
+    // TODO: setup auto focus for search input field
+
+    this.searchDrawer.toggle();
+
+    // if (this.searchDrawer.opened) {
+    //   setTimeout(() => {
+    //     console.log('searchInput', this.searchInput);
+    //     // this will make the execution after the above boolean has changed
+    //     this.searchInput.nativeElement.focus();
+    //   }, 0);
+    // }
+  }
+
+  search() {
+    console.log('SEARCHING');
   }
 }
