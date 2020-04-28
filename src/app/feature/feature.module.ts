@@ -9,7 +9,14 @@ import { MetricsComponent } from './pages/metrics/metrics.component';
 import { ProjectDialogComponent } from './dialogs/project-dialog/project-dialog.component';
 
 @NgModule({
-  declarations: [PageNotFoundComponent, DashboardComponent, ProjectsComponent, TasksComponent, MetricsComponent, ProjectDialogComponent],
+  declarations: [
+    PageNotFoundComponent,
+    DashboardComponent,
+    ProjectsComponent,
+    TasksComponent,
+    MetricsComponent,
+    ProjectDialogComponent,
+  ],
   imports: [CommonModule, SharedModule],
 })
 export class FeatureModule {}
