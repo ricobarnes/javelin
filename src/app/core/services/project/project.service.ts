@@ -17,18 +17,22 @@ export class ProjectService {
   }
 
   findById(id: number): Observable<Project> {
+    // TODO: need to implement
     return this.http.get<Project>(this.baseUrl + id);
   }
 
   create(project: Project): Observable<Project> {
+    // TODO: need to implement
     return this.http.post<Project>(this.baseUrl, project);
   }
 
   update(project: Project): Observable<Project> {
+    // TODO: need to implement
     return this.http.put<Project>(this.baseUrl + project.id, project);
   }
 
   delete(id: number): Observable<Project> {
+    // TODO: need to implement
     return this.http.delete<Project>(this.baseUrl + id);
   }
 

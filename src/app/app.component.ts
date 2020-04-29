@@ -50,7 +50,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('mainDrawer') mainDrawer: MatDrawer;
   @ViewChild('searchDrawer') searchDrawer: MatDrawer;
   @ViewChild('settingsDrawer') settingsDrawer: MatDrawer;
-  // @ViewChild('searchInput') searchInput: ElementRef;
 
   searchFormGroup: FormGroup = this._fb.group({
     searchCtrl: new FormControl(),
@@ -127,7 +126,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   saveSettings() {
     console.log('Save Settings');
-
     console.log('settingsFormGroup', this.settingsFormGroup);
     console.log('settingsFormGroup value', this.settingsFormGroup.value);
 
