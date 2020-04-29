@@ -8,12 +8,12 @@ import { Project } from 'src/app/feature/models/project';
 })
 export class ProjectService {
   //
-  baseUrl = '';
+  baseUrl = 'assets/data/projects.json';
 
   constructor(private http: HttpClient) {}
 
-  find(): Observable<Project> {
-    return this.http.get<Project>(this.baseUrl);
+  findAll(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.baseUrl);
   }
 
   findById(id: number): Observable<Project> {

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Project } from '../../models/project';
+import { ProjectService } from 'src/app/core/services/project/project.service';
 
 @Component({
   selector: 'rrp-projects',
@@ -36,10 +37,21 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit() {
     this.getProjects();
+
+    this.projectService.findAll().subscribe((projs) => {
+      console.log('projs', projs);
+
+      const p: Project = projs[0];
+
+      console.log('projs[0]', p);
+    });
   }
 
   applyFilter(event: Event) {
