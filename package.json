@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "build:gitlab": "ng build --base-href=/javelin/",
-    "test": "ng test --code-coverage",
-    "test:headless": "ng test --code-coverage --browsers=ChromeHeadless --watch=false",
+    "test": "ng test javelin --code-coverage",
+    "test:headless": "ng test javelin --code-coverage --browsers=ChromeHeadless --watch=false",
     "cov": "http-server -o ./coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
