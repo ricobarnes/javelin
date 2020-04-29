@@ -27,6 +27,10 @@ mat-drawer-content {
   border-radius: 0;
 }
 
+.sidenav-btn + span {
+  font-weight: 300;
+}
+
 .sidenav-active-btn {
   background-color: mat-color($dynamic-theme-accent, 500);
   border-radius: 0;

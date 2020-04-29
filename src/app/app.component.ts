@@ -44,10 +44,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     { name: 'Completed', id: 3 },
   ];
 
-  searchFormGroup: FormGroup = this._fb.group({
-    searchCtrl: new FormControl(),
-  });
-
   primaryColor: string = this._colorPaletteService.primaryColor;
   secondaryColor: string = this._colorPaletteService.secondaryColor;
 
@@ -55,6 +51,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('searchDrawer') searchDrawer: MatDrawer;
   @ViewChild('settingsDrawer') settingsDrawer: MatDrawer;
   // @ViewChild('searchInput') searchInput: ElementRef;
+
+  searchFormGroup: FormGroup = this._fb.group({
+    searchCtrl: new FormControl(),
+  });
+
+  searchList = [];
 
   constructor(
     private _layoutService: LayoutService,
@@ -104,16 +106,21 @@ export class AppComponent implements OnInit, AfterViewInit {
     //
     this.searchFormGroup.valueChanges.subscribe((ctrl) => {
       const searchText: string = ctrl.searchCtrl;
+      let results = [];
 
       console.log('ctrl', ctrl);
       console.log('searchText', searchText);
 
       if (searchText.length >= 3) {
         this._projectService.findAll().subscribe((projs) => {
-          const result = this._projectService.search(projs, searchText);
+          results = this._projectService.search(projs, searchText);
 
-          console.log('result', result);
+          console.log('results', results);
+
+          this.searchList = results;
         });
+      } else {
+        this.searchList = [];
       }
     });
   }
@@ -165,20 +172,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openSearchDrawer() {
-    // TODO: setup auto focus for search input field
-
     this.searchDrawer.toggle();
-
-    // if (this.searchDrawer.opened) {
-    //   setTimeout(() => {
-    //     console.log('searchInput', this.searchInput);
-    //     // this will make the execution after the above boolean has changed
-    //     this.searchInput.nativeElement.focus();
-    //   }, 0);
-    // }
-  }
-
-  search() {
-    console.log('SEARCHING');
   }
 }

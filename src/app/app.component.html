@@ -9,7 +9,7 @@
     <div class="search-wrap">
       <button
         mat-icon-button
-        style="margin-top: 8px;"
+        style="margin-top: 5px;"
         (click)="searchDrawer.close()"
       >
         <mat-icon>keyboard_backspace</mat-icon>
@@ -37,6 +37,12 @@
         </mat-form-field>
       </form>
     </div>
+
+    <div style="padding: 0 65px;">
+      <p>TEST 1</p>
+      <p>TEST 2</p>
+      <p *ngFor="let item of searchList">{{ item.name }}</p>
+    </div>
   </mat-drawer>
 
   <mat-drawer-content style="height: 100vh; background-color: #f0f0f0;">
@@ -60,6 +66,16 @@
             />
           </div>
 
+          <p
+            style="
+              padding-left: 15px;
+              font-size: 10px;
+              margin-top: 25px;
+              margin-bottom: 5px;
+            "
+          >
+            NAVIGATION
+          </p>
           <button
             mat-button
             [routerLink]="['/']"
@@ -105,6 +121,13 @@
             >
             <span>Metrics</span>
           </button>
+
+          <div style="padding: 50px 15px;">
+            <mat-divider style="border-top-color: #ffffff40;"></mat-divider>
+          </div>
+
+          <p style="padding-left: 15px; font-size: 10px;">ACTIONS</p>
+
           <button
             mat-button
             (click)="openSearchDrawer()"
@@ -117,7 +140,38 @@
             <span>Search</span>
           </button>
 
+          <button mat-button style="display: flex; height: 50px;">
+            <mat-icon class="material-icons-outlined sidenav-btn">add</mat-icon>
+            <span>Add</span>
+          </button>
+
+          <div style="padding: 50px 15px;">
+            <mat-divider style="border-top-color: #ffffff40;"></mat-divider>
+          </div>
+
           <div style="margin-top: auto;">
+            <div style="margin-bottom: 30px;">
+              <p
+                style="padding-left: 15px; font-size: 10px; margin-bottom: 5px;"
+              >
+                SUPPORT
+              </p>
+
+              <button mat-button style="display: flex; height: 50px;">
+                <mat-icon class="material-icons-outlined sidenav-btn"
+                  >menu_book</mat-icon
+                >
+                <span>Documentation</span>
+              </button>
+
+              <button mat-button style="display: flex; height: 50px;">
+                <mat-icon class="material-icons-outlined sidenav-btn"
+                  >help_outlined</mat-icon
+                >
+                <span>Help</span>
+              </button>
+            </div>
+
             <p
               style="
                 display: flex;
