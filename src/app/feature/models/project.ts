@@ -14,5 +14,4 @@ export interface Project {
   notes: string[];
   phase: string;
   status: string;
-  action: string;
 }

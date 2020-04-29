@@ -18,6 +18,7 @@
       <form
         class="example-form"
         style="display: flex; width: 100%; padding: 0 10px;"
+        [formGroup]="searchFormGroup"
       >
         <mat-form-field
           class="example-full-width"
@@ -27,7 +28,12 @@
           <mat-label
             >Search for projects, articles, tasks and more...</mat-label
           >
-          <input matInput placeholder="Ex. Pizza" cdkFocusInitial />
+          <input
+            matInput
+            placeholder="Ex. Pizza"
+            cdkFocusInitial
+            formControlName="searchCtrl"
+          />
         </mat-form-field>
       </form>
     </div>

@@ -31,4 +31,20 @@ export class ProjectService {
   delete(id: number): Observable<Project> {
     return this.http.delete<Project>(this.baseUrl + id);
   }
+
+  search(items: Project[], text: any): Project[] {
+    const searchText: string[] = text.split(' ');
+    return items.filter((item) => {
+      return searchText.every((el) => {
+        return (
+          item.name.toLowerCase().indexOf(el.toLowerCase()) > -1 ||
+          item.number.toLowerCase().indexOf(el.toLowerCase()) > -1 ||
+          item.author.toLowerCase().indexOf(el.toLowerCase()) > -1 ||
+          item.reviewer.toLowerCase().indexOf(el.toLowerCase()) > -1 ||
+          item.type.toLowerCase().indexOf(el.toLowerCase()) > -1 ||
+          item.category.toLowerCase().indexOf(el.toLowerCase()) > -1
+        );
+      });
+    });
+  }
 }

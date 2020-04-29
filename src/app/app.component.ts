@@ -11,6 +11,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { version } from '../../package.json';
 import { ColorPaletteService } from './core/services/color-palette/color-palette.service';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { Project } from './feature/models/project';
+import { ProjectService } from './core/services/project/project.service';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +44,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     { name: 'Completed', id: 3 },
   ];
 
+  searchFormGroup: FormGroup = this._fb.group({
+    searchCtrl: new FormControl(),
+  });
+
   primaryColor: string = this._colorPaletteService.primaryColor;
   secondaryColor: string = this._colorPaletteService.secondaryColor;
 
@@ -53,7 +59,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private _layoutService: LayoutService,
     private _fb: FormBuilder,
-    private _colorPaletteService: ColorPaletteService
+    private _colorPaletteService: ColorPaletteService,
+    private _projectService: ProjectService
   ) {
     this._colorPaletteService.initColorPalette();
   }
@@ -92,6 +99,22 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._layoutService.getShowSettings().subscribe((val) => {
         this.settingsDrawer.opened = val;
       });
+    });
+
+    //
+    this.searchFormGroup.valueChanges.subscribe((ctrl) => {
+      const searchText: string = ctrl.searchCtrl;
+
+      console.log('ctrl', ctrl);
+      console.log('searchText', searchText);
+
+      if (searchText.length >= 3) {
+        this._projectService.findAll().subscribe((projs) => {
+          const result = this._projectService.search(projs, searchText);
+
+          console.log('result', result);
+        });
+      }
     });
   }
 
