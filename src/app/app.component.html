@@ -41,7 +41,10 @@
     <div style="padding: 0 65px;">
       <p>TEST 1</p>
       <p>TEST 2</p>
-      <p *ngFor="let item of searchList">{{ item.name }}</p>
+      <div *ngFor="let item of searchList" style="display: flex;">
+        <mat-icon class="material-icons-outlined">folder</mat-icon>
+        <p>{{ item.name }}</p>
+      </div>
     </div>
   </mat-drawer>
 
