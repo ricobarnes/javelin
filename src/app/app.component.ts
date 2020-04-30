@@ -172,4 +172,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   openSearchDrawer() {
     this.searchDrawer.toggle();
   }
+
+  selectSearchItem(item: any) {
+    console.log('item', item);
+  }
 }
