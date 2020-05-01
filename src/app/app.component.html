@@ -44,7 +44,65 @@
         *ngFor="let item of searchList"
         (click)="selectSearchItem(item)"
       >
-        <mat-icon class="material-icons-outlined">folder</mat-icon>
+        <div *ngIf="isProject(item)">
+          <mat-icon class="material-icons-outlined" style="color: orange;"
+            >folder</mat-icon
+          >
+          <div>
+            <p style="margin-bottom: 0;">{{ item.name }}</p>
+            <p class="search-list-subtext">
+              {{ item.description }}
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="isAuthor(item)">
+          <mat-icon class="material-icons-outlined" style="color: #fd8080;"
+            >person</mat-icon
+          >
+          <div>
+            <p style="margin-bottom: 0;">
+              {{ item.firstName }} {{ item.lastName }}
+            </p>
+            <p class="search-list-subtext">
+              {{ item.notes }}
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="isDocument(item)">
+          <mat-icon class="material-icons-outlined" style="color: #7575ff;"
+            >description</mat-icon
+          >
+          <div>
+            <p style="margin-bottom: 0;">{{ item.title }}</p>
+            <p class="search-list-subtext">
+              {{ item.description }}
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="isTask(item)">
+          <mat-icon class="material-icons-outlined" color="accent"
+            >playlist_add_check</mat-icon
+          >
+          <div>
+            <p style="margin-bottom: 0;">{{ item.title }}</p>
+            <p class="search-list-subtext">
+              {{ item.instructions }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div
+        matRipple
+        *ngFor="let item of searchList"
+        (click)="selectSearchItem(item)"
+      >
+        <mat-icon class="material-icons-outlined" color="accent"
+          >playlist_add_check</mat-icon
+        >
         <div>
           <p style="margin-bottom: 0;">{{ item.name }}</p>
           <p class="search-list-subtext">
@@ -52,6 +110,7 @@
           </p>
         </div>
       </div>
+ -->
     </div>
   </mat-drawer>
 
@@ -136,7 +195,9 @@
             <mat-divider style="border-top-color: #ffffff40;"></mat-divider>
           </div>
 
-          <p style="padding-left: 15px; font-size: 10px;">ACTIONS</p>
+          <p style="padding-left: 15px; font-size: 10px; margin-bottom: 5px;">
+            ACTIONS
+          </p>
 
           <button
             mat-button

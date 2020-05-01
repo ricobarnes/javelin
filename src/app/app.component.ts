@@ -12,7 +12,15 @@ import { version } from '../../package.json';
 import { ColorPaletteService } from './core/services/color-palette/color-palette.service';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Project } from './feature/models/project';
+import { Document } from './feature/models/document';
+import { Task } from './feature/models/task';
+import { Author } from './feature/models/author';
 import { ProjectService } from './core/services/project/project.service';
+import { Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DocumentService } from './core/services/document/document.service';
+import { TaskService } from './core/services/task/task.service';
+import { AuthorService } from './core/services/author/author.service';
 
 @Component({
   selector: 'app-root',
@@ -61,7 +69,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _layoutService: LayoutService,
     private _fb: FormBuilder,
     private _colorPaletteService: ColorPaletteService,
-    private _projectService: ProjectService
+    private _projectService: ProjectService,
+    private _documentService: DocumentService,
+    private _taskService: TaskService,
+    private _authorService: AuthorService
   ) {
     this._colorPaletteService.initColorPalette();
   }
@@ -105,23 +116,86 @@ export class AppComponent implements OnInit, AfterViewInit {
     //
     this.searchFormGroup.valueChanges.subscribe((ctrl) => {
       const searchText: string = ctrl.searchCtrl;
-      let results = [];
 
       console.log('ctrl', ctrl);
       console.log('searchText', searchText);
 
       if (searchText.length >= 3) {
-        this._projectService.findAll().subscribe((projs) => {
-          results = this._projectService.search(projs, searchText);
+        const projObs = this._projectService
+          .findAll()
+          .pipe(map((res) => this._projectService.search(res, searchText)));
+        const authorObs = this._authorService
+          .findAll()
+          .pipe(map((res) => this._authorService.search(res, searchText)));
+        const taskObs = this._taskService
+          .findAll()
+          .pipe(map((res) => this._taskService.search(res, searchText)));
+        const docObs = this._documentService
+          .findAll()
+          .pipe(map((res) => this._documentService.search(res, searchText)));
 
-          console.log('results', results);
+        forkJoin([projObs, authorObs, taskObs, docObs]).subscribe((res) => {
+          console.log('results', res);
 
-          this.searchList = results;
+          const flattenedArray = [].concat(...res);
+          console.log('flattenedArray', res);
+
+          this.searchList = flattenedArray;
         });
       } else {
         this.searchList = [];
       }
     });
+
+    // const TESTsearchText = 'Rico';
+
+    // const TESTprojObs = this._projectService
+    //   .findAll()
+    //   .pipe(map((res) => this._projectService.search(res, TESTsearchText)));
+    // const TESTauthorObs = this._authorService
+    //   .findAll()
+    //   .pipe(map((res) => this._authorService.search(res, TESTsearchText)));
+    // const TESTtaskObs = this._taskService
+    //   .findAll()
+    //   .pipe(map((res) => this._taskService.search(res, TESTsearchText)));
+    // const TESTdocObs = this._documentService
+    //   .findAll()
+    //   .pipe(map((res) => this._documentService.search(res, TESTsearchText)));
+
+    // forkJoin([TESTprojObs, TESTauthorObs, TESTtaskObs, TESTdocObs]).subscribe(
+    //   (res) => {
+    //     console.log('results', res);
+
+    //     // const p = this.isProject(res[0][0]);
+    //     // const a = this.isAuthor(res[1]);
+    //     // const t = this.isTask(res[2]);
+    //     // const d = this.isDocument(res[3]);
+
+    //     // console.log(res[0][0]);
+    //     // console.log(res[1]);
+    //     // console.log(res[2]);
+    //     // console.log(res[3]);
+    //     // console.log({ p, a, t, d });
+
+    //     this.searchList = res;
+    //   }
+    // );
+  }
+
+  isProject(object: any): object is Project {
+    return 'publicationDate' in object;
+  }
+
+  isAuthor(object: any): object is Author {
+    return 'address' in object;
+  }
+
+  isDocument(object: any): object is Document {
+    return 'file' in object;
+  }
+
+  isTask(object: any): object is Task {
+    return 'dateCompleted' in object;
   }
 
   saveSettings() {

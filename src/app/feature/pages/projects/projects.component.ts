@@ -43,14 +43,17 @@ export class ProjectsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getProjects();
+    // this.getProjects();
 
     this.projectService.findAll().subscribe((projs) => {
       console.log('projs', projs);
 
-      const p: Project = projs[0];
-
-      console.log('projs[0]', p);
+      // const p: Project = projs[0];
+      // console.log('projs[0]', p);
+      // const pArr: Project[] = JSON.parse(projs);
+      this.dataSource.data = projs;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -73,6 +76,9 @@ export class ProjectsComponent implements OnInit {
         updatedList.push(val);
 
         this.dataSource.data = updatedList;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
         localStorage.setItem('projectList', JSON.stringify(updatedList));
       }
       const pList = localStorage.getItem('projectList');
@@ -93,6 +99,8 @@ export class ProjectsComponent implements OnInit {
     if (pList) {
       const pArr: Project[] = JSON.parse(pList);
       this.dataSource.data = pArr;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     } else {
       localStorage.setItem('projectList', JSON.stringify([]));
     }
@@ -120,6 +128,8 @@ export class ProjectsComponent implements OnInit {
       //   localStorage.setItem('projectList', JSON.stringify(pList));
 
       //   this.dataSource.data = pList;
+      // this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator;
     }
   }
 }

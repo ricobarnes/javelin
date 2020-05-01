@@ -57,12 +57,12 @@ mat-drawer-content {
   margin-top: -30px;
 }
 
-.search-list-container > div {
+.search-list-container > div > div {
   display: flex;
   padding: 5px;
 }
 
-.search-list-container > div > div {
+.search-list-container > div > div > div {
   padding-left: 7px;
 }
 
