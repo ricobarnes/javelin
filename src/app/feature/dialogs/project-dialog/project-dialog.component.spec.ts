@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectDialogComponent } from './project-dialog.component';
+import { TestsModule } from 'src/app/shared/tests/tests.module';
 
 describe('ProjectDialogComponent', () => {
   let component: ProjectDialogComponent;
@@ -8,9 +9,9 @@ describe('ProjectDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [ProjectDialogComponent],
+      imports: [TestsModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
