@@ -119,9 +119,10 @@
       <mat-sidenav
         #mainDrawer
         [opened]="true"
-        mode="side"
+        [mode]="sideNavMode"
         class="sidenav mat-elevation-z4"
         [style.width]="isSidebarWide ? '200px' : '50px'"
+        (closedStart)="sideNavClosing()"
       >
         <div
           *ngIf="isSidebarWide; else showSmallSidebar"
@@ -523,8 +524,7 @@
       </mat-sidenav>
 
       <mat-sidenav-content
-        [style.margin-left]="isSidebarWide ? '200px' : '50px'"
-        style="height: 100vh; background-color: #f0f0f0;"
+        style="height: 100vh; background-color: #f0f0f0; overflow-x: hidden;"
       >
         <rrp-header
           style="position: sticky; top: 0px; z-index: 777;"

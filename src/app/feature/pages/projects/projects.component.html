@@ -194,6 +194,13 @@
       ></tr>
     </table>
   </div>
+
+  <mat-progress-bar
+    *ngIf="loading"
+    mode="indeterminate"
+    color="accent"
+  ></mat-progress-bar>
+
   <mat-paginator
     [pageSizeOptions]="[10, 25, 50]"
     showFirstLastButtons

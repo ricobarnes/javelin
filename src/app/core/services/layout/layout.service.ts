@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LayoutService {
   private _isWide: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private _showSettings: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private _smallScreen: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() {}
 
@@ -28,5 +29,13 @@ export class LayoutService {
 
   getShowSettings() {
     return this._showSettings.asObservable();
+  }
+
+  setSmallScreen(val: boolean) {
+    this._smallScreen.next(val);
+  }
+
+  isSmallScreen(): Observable<boolean> {
+    return this._smallScreen.asObservable();
   }
 }

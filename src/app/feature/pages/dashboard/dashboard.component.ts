@@ -10,15 +10,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     //
-    let blob = new Blob([''], { type: 'text/html' });
-    blob['lastModifiedDate'] = new Date();
-    blob['name'] = 'filename';
-
-    const fakeF: File = blob as File;
-
-    console.log('blob', blob);
-    console.log('fakeF', fakeF);
-    console.log('fakeF JSON', JSON.stringify(stringifyFileObject(fakeF)));
+    // let blob = new Blob([''], { type: 'text/html' });
+    // blob['lastModifiedDate'] = new Date();
+    // blob['name'] = 'filename';
+    // const fakeF: File = blob as File;
+    // console.log('blob', blob);
+    // console.log('fakeF', fakeF);
+    // console.log('fakeF JSON', JSON.stringify(stringifyFileObject(fakeF)));
   }
 }
 

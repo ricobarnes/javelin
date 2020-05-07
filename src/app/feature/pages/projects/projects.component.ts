@@ -37,6 +37,8 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  loading = true;
+
   constructor(
     private dialog: MatDialog,
     private projectService: ProjectService
@@ -54,6 +56,8 @@ export class ProjectsComponent implements OnInit {
       this.dataSource.data = projs;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      this.loading = false;
     });
   }
 

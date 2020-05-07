@@ -17,10 +17,11 @@ import { Task } from './feature/models/task';
 import { Author } from './feature/models/author';
 import { ProjectService } from './core/services/project/project.service';
 import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { DocumentService } from './core/services/document/document.service';
 import { TaskService } from './core/services/task/task.service';
 import { AuthorService } from './core/services/author/author.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -65,6 +66,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   searchList = [];
 
+  sideNavMode = 'side';
+  isLargeScreen = false;
+
   constructor(
     private _layoutService: LayoutService,
     private _fb: FormBuilder,
@@ -72,14 +76,23 @@ export class AppComponent implements OnInit, AfterViewInit {
     private _projectService: ProjectService,
     private _documentService: DocumentService,
     private _taskService: TaskService,
-    private _authorService: AuthorService
+    private _authorService: AuthorService,
+    private _breakpointObserver: BreakpointObserver
   ) {
     this._colorPaletteService.initColorPalette();
   }
 
   ngOnInit() {
     this._layoutService.isWide().subscribe((val) => {
+      if (!this.isLargeScreen && val) {
+        this.sideNavMode = 'over';
+      } else {
+        this.sideNavMode = 'side';
+      }
+
       this.isSidebarWide = val;
+
+      // console.log('isSidebarWide', this.isSidebarWide);
     });
 
     this.version = `Version ${version}`;
@@ -104,6 +117,19 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._colorPaletteService.savePrimaryColor(primary);
       this._colorPaletteService.saveSecondaryColor(secondary);
     });
+
+    this._breakpointObserver
+      .observe(['(min-width: 600px)'])
+      .pipe(tap((result) => (this.isLargeScreen = result.matches)))
+      .subscribe((result) => {
+        // console.log('res', result);
+
+        // console.log('isLargeScreen', this.isLargeScreen);
+
+        //
+        this._layoutService.setIsWide(result.matches);
+        this._layoutService.setSmallScreen(!result.matches);
+      });
   }
 
   ngAfterViewInit() {
@@ -117,8 +143,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.searchFormGroup.valueChanges.subscribe((ctrl) => {
       const searchText: string = ctrl.searchCtrl;
 
-      console.log('ctrl', ctrl);
-      console.log('searchText', searchText);
+      // console.log('ctrl', ctrl);
+      // console.log('searchText', searchText);
 
       if (searchText.length >= 3) {
         const projObs = this._projectService
@@ -135,10 +161,10 @@ export class AppComponent implements OnInit, AfterViewInit {
           .pipe(map((res) => this._documentService.search(res, searchText)));
 
         forkJoin([projObs, authorObs, taskObs, docObs]).subscribe((res) => {
-          console.log('results', res);
+          // console.log('results', res);
 
           const flattenedArray = [].concat(...res);
-          console.log('flattenedArray', res);
+          console.log('flattened Result', flattenedArray);
 
           this.searchList = flattenedArray;
         });
@@ -248,6 +274,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   selectSearchItem(item: any) {
-    console.log('item', item);
+    console.log('selected search item', item);
+  }
+
+  sideNavClosing() {
+    // console.log('>>>> sideNavClosing');
+
+    this.sideNavMode = 'side';
+    this._layoutService.setIsWide(false);
+    this.mainDrawer.open();
   }
 }
