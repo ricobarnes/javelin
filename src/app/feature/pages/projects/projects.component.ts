@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Project } from '../../models/project';
+import { ProjectService } from 'src/app/core/services/project/project.service';
 
 @Component({
   selector: 'rrp-projects',
@@ -36,10 +37,28 @@ export class ProjectsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {}
+  loading = true;
+
+  constructor(
+    private dialog: MatDialog,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit() {
-    this.getProjects();
+    // this.getProjects();
+
+    this.projectService.findAll().subscribe((projs) => {
+      console.log('projs', projs);
+
+      // const p: Project = projs[0];
+      // console.log('projs[0]', p);
+      // const pArr: Project[] = JSON.parse(projs);
+      this.dataSource.data = projs;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
+      this.loading = false;
+    });
   }
 
   applyFilter(event: Event) {
@@ -61,8 +80,14 @@ export class ProjectsComponent implements OnInit {
         updatedList.push(val);
 
         this.dataSource.data = updatedList;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
         localStorage.setItem('projectList', JSON.stringify(updatedList));
       }
+      const pList = localStorage.getItem('projectList');
+
+      console.log('*** pList', pList);
     });
   }
 
@@ -78,6 +103,8 @@ export class ProjectsComponent implements OnInit {
     if (pList) {
       const pArr: Project[] = JSON.parse(pList);
       this.dataSource.data = pArr;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     } else {
       localStorage.setItem('projectList', JSON.stringify([]));
     }
@@ -105,6 +132,8 @@ export class ProjectsComponent implements OnInit {
       //   localStorage.setItem('projectList', JSON.stringify(pList));
 
       //   this.dataSource.data = pList;
+      // this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator;
     }
   }
 }

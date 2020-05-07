@@ -29,6 +29,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
 
 const mods = [
   MatButtonModule,
@@ -60,6 +63,9 @@ const mods = [
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatSelectModule,
+  MatDividerModule,
+  MatListModule,
+  MatRippleModule,
 ];
 
 @NgModule({
